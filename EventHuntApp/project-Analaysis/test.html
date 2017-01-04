@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<div class="container">
+     <div class="page-header">
+        <h1>CMPE226 - SuperDB <small>Analysis Query</small></h1>
+    </div>
+
+    
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-signin" action = "SuperDBanalysis.php" method = "post">
+                
+                <div class="select">
+                Analysis For: <select name="queryTable" onchange="disable(this.value)">
+                  <option value="">select</option>
+                  <option value="participantEEC">Participant Number based on Event Location, Type</option>
+                  <option value="participantUEC">Participant Number based on User Location, Type</option>
+                  <option value="paymentDetail">Transaction Payment details based on User Info, Event Info, Card type</option>
+                  <option value="paymentCTU">Payment Amount based on Type, User Location </option>
+                  <option value="paymentUCTE">Payment Amount based on Type, User info, Event Location</option>
+                  <option value="eventNo">Event Number based on Event Location, Type</option>
+                  <option value="eventFeeType">Event Fee based on Event Location, Type</option>
+                 </select>
+                </div>
+ 
+                <script>
+                
+                 function disable(val)
+                 {
+                        document.getElementById("stateOfEvent").disabled=false;
+                        document.getElementById("stateOfUser").disabled=false;
+                        document.getElementById("eventType").disabled=false;
+                        document.getElementById("userGender").disabled=false;
+                        document.getElementById("payfor").disabled=false;
+                        document.getElementById("cardType").disabled=false;
+                        document.getElementById("AgeRange").disabled=false;
+                        document.getElementById("YearRange").disabled=false;
+                        document.getElementById("feeRange").disabled=false;
+                     
+                     if(val=="participantEEC")
+                     {
+                        document.getElementById("stateOfUser").disabled=true;
+                        document.getElementById("userGender").disabled=true;
+                        document.getElementById("payfor").disabled=true;
+                        document.getElementById("cardType").disabled=true;
+                        document.getElementById("AgeRange").disabled=true;
+                        
+                     }
+                        
+                     else if(val=="participantUEC")
+                     {
+                        document.getElementById("stateOfEvent").disabled=true;
+                        document.getElementById("userGender").disabled=true;
+                        document.getElementById("payfor").disabled=true;
+                        document.getElementById("cardType").disabled=true;
+                        document.getElementById("AgeRange").disabled=true;
+                        document.getElementById("feeRange").disabled=true;
+                     }
+                     else if(val=="eventFeeType")
+                     {
+                        document.getElementById("stateOfUser").disabled=true;
+                        document.getElementById("userGender").disabled=true;
+                        document.getElementById("payfor").disabled=true;
+                        document.getElementById("cardType").disabled=true;
+                        document.getElementById("AgeRange").disabled=true;
+                        document.getElementById("feeRange").disabled=true;
+                     }
+                     else if(val=="paymentDetail")
+                     {
+                         document.getElementById("stateOfEvent").disabled=true;
+                     }
+                     else if(val=="paymentCTU")
+                     {
+                        document.getElementById("stateOfEvent").disabled=true;
+                        document.getElementById("userGender").disabled=true;
+                        document.getElementById("payfor").disabled=true;
+                        document.getElementById("cardType").disabled=true;
+                        document.getElementById("AgeRange").disabled=true;
+                        document.getElementById("feeRange").disabled=true;
+                         
+                     }
+                     else if(val=="paymentUCTE")
+                     {
+                        document.getElementById("feeRange").disabled=true;
+                        document.getElementById("stateOfUser").disabled=true;
+                        document.getElementById("cardType").disabled=true;
+                         
+                     }
+                     else if(val=="eventNo")
+                     {
+                        document.getElementById("stateOfUser").disabled=true;
+                        document.getElementById("userGender").disabled=true;
+                        document.getElementById("payfor").disabled=true;
+                        document.getElementById("cardType").disabled=true;
+                        document.getElementById("AgeRange").disabled=true;
+                        document.getElementById("feeRange").disabled=true;
+                     }
+                     
+                 }
+                 
+                 function yearAgeDisable(val){
+                     document.getElementById("YearRange").disabled=false; 
+                     if(val != "select")
+                     {
+                        document.getElementById("YearRange").disabled=true; 
+
+                     }
+                     else if(val == "select")
+                     {
+                        document.getElementById("YearRange").disabled=false; 
+                     }
+                 }
+                 
+                function quaterDisable(val){
+                     if(val != "select")
+                     {
+                        var a= document.getElementsByName("quarter");
+                        for (var i = 0; i < a.length; i++) {
+                          a.item(i).disabled = true;
+                        }
+                     }
+                     else if(val == "select")
+                     {
+                        document.getElementById("quarter").disabled=false; 
+                     }
+                 }
+                 
+               </script>
+               
+               
+              <div class="select">
+               
+                Month: <select id="month" name="month" onchange = "quaterDisable(this.value)">
+                  <option value="select">select</option>
+                  <option value="Janurary">Jan</option>
+                  <option value="February">Feb</option>
+                  <option value="March">Mar</option>
+                  <option value="April">Apr</option>
+                  <option value="May">May</option>
+                  <option value="June">Jun</option>
+                  <option value="July">Jul</option>
+                  <option value="August">Aug</option>
+                  <option value="September">Sep</option>
+                  <option value="October">Oct</option>
+                  <option value="November">Nov</option>
+                  <option value="December">Dec</option>
+                 </select>
+                </div>
+                
+             <div class="select">
+                 Day : <select id="day" name="day"  >
+                    <option value="select">select</option>
+                    <option value="1">1</option>
+                   	<option value="2">2</option>
+                   	<option value="3">3</option>
+                   	<option value="4">4</option>
+                   	<option value="5">5</option>
+                   	<option value="6">6</option>
+                   	<option value="7">7</option>
+                   	<option value="8">8</option>
+                   	<option value="9">9</option>
+                   	<option value="10">10</option>
+                   	<option value="11">11</option>
+                   	<option value="12">12</option>
+                   	<option value="13">13</option>
+                   	<option value="14">14</option>
+                   	<option value="15">15</option>
+                   	<option value="16">16</option>
+                   	<option value="17">17</option>
+                   	<option value="18">18</option>
+                   	<option value="19">19</option>
+                   	<option value="20">20</option>
+                   	<option value="21">21</option>
+                   	<option value="22">22</option>
+                   	<option value="23">23</option>
+                   	<option value="24">24</option>
+                   	<option value="25">25</option>
+                   	<option value="26">26</option>
+                   	<option value="27">27</option>
+                   	<option value="28">28</option>
+                   	<option value="29">29</option>
+                   	<option value="30">30</option>
+                   	<option value="31">31</option>
+                    </select>
+                 </div>
+                  
+                <div class="radio">
+                   Quarter: 
+                    <label>
+                        <input type="radio"  name = "quarter" value = "select" checked> No
+                    </label>
+                    <label>
+                        <input type="radio"  name = "quarter" value = "1"> 1
+                    </label>
+                    <label>
+                        <input type="radio"  name = "quarter" value = "2"> 2
+                    </label>
+                    <label>
+                        <input type="radio"  name = "quarter" value = "3"> 3
+                    </label>
+                    <label>
+                        <input type="radio"  name = "quarter" value = "4"> 4
+                    </label>
+                </div>
+                
+               <div class="select">
+                  Year: <select id="year" name="year" onchange = "yearAgeDisable(this.value)">
+                  	<option value="select">select</option>
+                  	<option value="2016">2016</option>
+                  	<option value="2015">2015</option>
+                  	<option value="2014">2014</option>
+                  	<option value="2013">2013</option>
+                  	<option value="2012">2012</option>
+                  	<option value="2011">2011</option>
+                  	<option value="2010">2010</option>
+                 </div>
+                <div class="select">     
+                   </select>
+                   Drill down data: <select id="drilldown" name = "drilldown">
+                        <option value="select">select</option>
+                        <option value="everyMonth">show every month records</option>
+                        <option value="everyQuarter">show every quarter records</option>
+                    </select>
+                </div>
+             <div class="select">
+                  
+                    Event Type : <select id="eventType" name="eventType"  >
+                    <option value="select">select</option>
+                    <option value="Erotic events">Erotic events</option>
+                   	<option value="Reunions">Reunions</option>
+                   	<option value="Conferences">Conferences</option>
+                   	<option value="Golf Tournament">Golf Tournament</option>
+                   	<option value="Ceremonies">Ceremonies</option>
+                   	<option value="Clothing-free event">Clothing-free event</option>
+                   	<option value="Art or Museum Gathering">Art or Museum Gathering</option>
+                   	<option value="Feminist events">Feminist events</option>
+                   	<option value="Outdoor">Outdoor</option>
+                   	<option value="Fashion Show">Fashion Show</option>
+                   	<option value="Party">Party</option>
+                   	<option value="Anniversary Celebration">Anniversary Celebration</option>
+                   	<option value="Exhibitions">Exhibitions</option>
+                   	<option value="Wine-tasting and Pairing Meals"> Wine-tasting and Pairing Meals</option>
+                   	<option value="Exhibitions">Exhibitions</option>
+                   	<option value="Debates">Debates</option>
+                   	<option value="Tech ¡®n Show">Tech ¡®n Show</option>
+                   	<option value="Competition">Competition</option>
+                   	<option value="Weddings">Weddings</option>
+                   	<option value="Trade Shows">Trade Shows</option>
+                   	<option value="Cocktail Parties">Cocktail Parties</option>
+                   	<option value="Balls (dance party)">Balls (dance party)</option>
+                    </select>
+                  </div>
+                <div class="select">    
+                    State Of Event: <select id="stateOfEvent" name="stateOfEvent"   >
+                     <option value="select">select</option>
+                    	<option value="Alabama">Alabama</option>
+                    	<option value="Alaska">Alaska</option>
+                    	<option value="Arizona">Arizona</option>
+                    	<option value="Arkansas">Arkansas</option>
+                    	<option value="California">California</option>
+                    	<option value="Colorado">Colorado</option>
+                    	<option value="Connecticut">Connecticut</option>
+                    	<option value="Delaware">Delaware</option>
+                    	<option value="District Of Columbia">District Of Columbia</option>
+                    	<option value="Florida">Florida</option>
+                    	<option value="Georgia">Georgia</option>
+                    	<option value="Hawaii">Hawaii</option>
+                    	<option value="Idaho">Idaho</option>
+                    	<option value="Illinois">Illinois</option>
+                    	<option value="Indiana">Indiana</option>
+                    	<option value="Iowa">Iowa</option>
+                    	<option value="Kansas">Kansas</option>
+                    	<option value="Kentucky">Kentucky</option>
+                    	<option value="Louisiana">Louisiana</option>
+                    	<option value="Maine">Maine</option>
+                    	<option value="Maryland">Maryland</option>
+                    	<option value="Massachusetts">Massachusetts</option>
+                    	<option value="Michigan">Michigan</option>
+                    	<option value="Minnesota">Minnesota</option>
+                    	<option value="Mississippi">Mississippi</option>
+                    	<option value="Missouri">Missouri</option>
+                    	<option value="Montana">Montana</option>
+                    	<option value="Nebraska">Nebraska</option>
+                    	<option value="Nevada">Nevada</option>
+                    	<option value="NewHampshire">New Hampshire</option>
+                    	<option value="NewJersey">New Jersey</option>
+                    	<option value="NewMexico">New Mexico</option>
+                    	<option value="NewYork">New York</option>
+                    	<option value="NorthCarolina">North Carolina</option>
+                    	<option value="NorthDakota">North Dakota</option>
+                    	<option value="Ohio">Ohio</option>
+                    	<option value="Oklahoma">Oklahoma</option>
+                    	<option value="Oregon">Oregon</option>
+                    	<option value="Pennsylvania">Pennsylvania</option>
+                    	<option value="RhodeIsland">Rhode Island</option>
+                    	<option value="SouthCarolina">South Carolina</option>
+                    	<option value="SouthDakota">South Dakota</option>
+                    	<option value="Tennessee">Tennessee</option>
+                    	<option value="Texas">Texas</option>
+                    	<option value="Utah">Utah</option>
+                    	<option value="Vermont">Vermont</option>
+                    	<option value="Virginia">Virginia</option>
+                    	<option value="Washington">Washington</option>
+                    	<option value="WestVirginia">West Virginia</option>
+                    	<option value="Wisconsin">Wisconsin</option>
+                    	<option value="Wyoming">Wyoming</option>
+                    </select>	
+                    </div>
+                    
+                <div class="select">    
+                    State Of User: <select id="stateOfUser" name="stateOfUser"  >
+                     <option value="select">select</option>
+                    	<option value="Alabama">Alabama</option>
+                    	<option value="Alaska">Alaska</option>
+                    	<option value="Arizona">Arizona</option>
+                    	<option value="Arkansas">Arkansas</option>
+                    	<option value="California">California</option>
+                    	<option value="Colorado">Colorado</option>
+                    	<option value="Connecticut">Connecticut</option>
+                    	<option value="Delaware">Delaware</option>
+                    	<option value="District Of Columbia">District Of Columbia</option>
+                    	<option value="Florida">Florida</option>
+                    	<option value="Georgia">Georgia</option>
+                    	<option value="Hawaii">Hawaii</option>
+                    	<option value="Idaho">Idaho</option>
+                    	<option value="Illinois">Illinois</option>
+                    	<option value="Indiana">Indiana</option>
+                    	<option value="Iowa">Iowa</option>
+                    	<option value="Kansas">Kansas</option>
+                    	<option value="Kentucky">Kentucky</option>
+                    	<option value="Louisiana">Louisiana</option>
+                    	<option value="Maine">Maine</option>
+                    	<option value="Maryland">Maryland</option>
+                    	<option value="Massachusetts">Massachusetts</option>
+                    	<option value="Michigan">Michigan</option>
+                    	<option value="Minnesota">Minnesota</option>
+                    	<option value="Mississippi">Mississippi</option>
+                    	<option value="Missouri">Missouri</option>
+                    	<option value="Montana">Montana</option>
+                    	<option value="Nebraska">Nebraska</option>
+                    	<option value="Nevada">Nevada</option>
+                    	<option value="NewHampshire">New Hampshire</option>
+                    	<option value="NewJersey">New Jersey</option>
+                    	<option value="NewMexico">New Mexico</option>
+                    	<option value="NewYork">New York</option>
+                    	<option value="NorthCarolina">North Carolina</option>
+                    	<option value="NorthDakota">North Dakota</option>
+                    	<option value="Ohio">Ohio</option>
+                    	<option value="Oklahoma">Oklahoma</option>
+                    	<option value="Oregon">Oregon</option>
+                    	<option value="Pennsylvania">Pennsylvania</option>
+                    	<option value="RhodeIsland">Rhode Island</option>
+                    	<option value="SouthCarolina">South Carolina</option>
+                    	<option value="SouthDakota">South Dakota</option>
+                    	<option value="Tennessee">Tennessee</option>
+                    	<option value="Texas">Texas</option>
+                    	<option value="Utah">Utah</option>
+                    	<option value="Vermont">Vermont</option>
+                    	<option value="Virginia">Virginia</option>
+                    	<option value="Washington">Washington</option>
+                    	<option value="WestVirginia">West Virginia</option>
+                    	<option value="Wisconsin">Wisconsin</option>
+                    	<option value="Wyoming">Wyoming</option>
+                    </select>	
+                    </div>
+                    
+                <div class="select">    
+                  Gender : <select id="userGender" name="userGender"  >
+                 	<option value="select">select</option>
+                 	<option value="F">Female</option>
+                 	<option value="M">Male</option>
+                </select>
+                </div>
+                
+                <div class="select">    
+                  Paied for: <select id="payfor" name="payfor"  >
+                 	<option value="select">select</option>
+                 	<option value="Event_Fee">Event Fee</option>
+                 	<option value="Rent_Fee">Rent Fee</option>
+                </select>
+                </div>
+                
+                <div class="select">
+                 Card Type : <select id="cardType" name="cardTyp"  >
+                    <option value="select">select</option>
+                    <option value="American Express">American Express</option>
+                   	<option value="Diners Club">Diners Club</option>
+                   	<option value="MasterCard">MasterCard</option>
+                   	<option value="Cirrus">Cirrus</option>
+                   	<option value="Maestro">Maestro</option>
+                   	<option value="China UnionPay">China UnionPay</option>
+                   	<option value="Octopus card">Octopus card</option>
+                   	<option value="Mondex">Mondex</option>
+                   	<option value="VISA">VISA</option>
+                   	<option value="Redecard">Redecard</option>
+                   	<option value="Japan Credit Bureau">Japan Credit Bureau</option>
+                    </select>
+                 </div>
+
+                 <div class="input-group">
+                     <span class="input-group-addon" id="basic-addon1">AgeRange: </span>
+                     <input type="text" id= "AgeRange" name = "AgeRange" class="form-control" placeholder="13,30" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="input-group">    
+                     <span class="input-group-addon" id="basic-addon1">YearRange: </span>
+                     <input type="text" id ="YearRange" name = "YearRange" class="form-control" placeholder="2010,2015" aria-describedby="basic-addon1">
+                  </div> 
+                  
+                  <div class="input-group">    
+                     <span class="input-group-addon" id="basic-addon1">EventFee Range: </span>
+                     <input type="text" id ="feeRange" name = "feeRange" class="form-control" placeholder="0,2000" aria-describedby="basic-addon1" >
+                  </div>  
+                  
+                     <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+               </form>
+          </div>
+       </div>
+   </div>
+</html>
